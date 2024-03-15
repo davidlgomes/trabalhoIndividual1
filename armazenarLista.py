@@ -1,43 +1,38 @@
 def armazenarLista():
     lista=[]
-    pontoDeParada
-    do:
-        menu()
-        switch(pontoDeParada):
-            case 1:
-                lista.append(adicionarLista())
-                break 
-            case 2:
-                break
-            case 3:
-                break
-        end
-    pontoDeParada=fgets()
-    while pontoDeParada!="SIM" or pontoDeParada!="Sim" or pontoDeParada!="sim" or pontoDeParada!="SiM" or pontoDeParada!="SIm" or pontoDeParada!="sIM" or pontoDeParada!="siM"
-end
+    opcao=0
+    pontoDeParada=0
+    auxiliar=[]
+    while pontoDeParada!="SIM" and pontoDeParada!="Sim" and pontoDeParada!="sim" and pontoDeParada!="SiM" and pontoDeParada!="SIm" and pontoDeParada!="sIM" and pontoDeParada!="siM":
+        opcao=input("\nDigite a função desejada:\n   1 - Adicionar a lista\n   2 - Pesquisar na lista\n   3 - Adicionar lista através de dados Externos\n")
+        if opcao=='1':
+            auxiliar=adicionarLista()
+            print(auxiliar[0])
+            lista.append(f'e{auxiliar[0]}_t{auxiliar[2]}_p{auxiliar[1]}_s{auxiliar[3]}')
+        elif opcao=='2':
+            continue
+        elif opcao=='3':
+            continue
+        elif opcao!='1' and opcao!='2' and opcao!='3':
+            print("\nOpção Inválida\n")
+        pontoDeParada=input("Deseja Sair? ")
+    return lista 
 
-def menu()
-    print "Digite a função desejada: "
-    print "  1 - Adicionar a lista"
-    print "  2 - Pesquisar na lista"
-    print "  3 - Adicionar lista através de dados Externos"
-end
-
-def adicionarLista()
-    entrevista, testePratico, testeTeorico, softSkill, listaAuxiliar
-    print "Digite a nota da entrevista"
-    entrevista=fgets()
-    print "Digite a nota do Teste Prático"
-    testePratico=fgets()
-    print "Digite a nota do Teste Teórico"
-    testeTeorico=fgets()
-    print "Digite a nota de Soft Skill"
-    softSkill=fgets()
+def adicionarLista():
+    entrevista=0
+    testePratico=0
+    testeTeorico=0 
+    softSkill=0 
+    listaAuxiliar=[]
+    entrevista=input("\nDigite a nota da entrevista: \n")
+    testePratico=input("\nDigite a nota do Teste Prático: \n")
+    testeTeorico=input("\nDigite a nota do Teste Teórico: \n")
+    softSkill=input("\nDigite a nota de Soft Skill: \n")
     listaAuxiliar.append(entrevista)
     listaAuxiliar.append(testePratico)
     listaAuxiliar.append(testeTeorico)
     listaAuxiliar.append(softSkill)
-    listaAuxiliar
-end
+    return listaAuxiliar
 
 
+print(armazenarLista())
