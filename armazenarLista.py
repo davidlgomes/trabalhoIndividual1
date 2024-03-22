@@ -1,9 +1,12 @@
+import pandas as pd
+
 def main():
     lista=[]
     opcao=0
     pontoDeParada=0
     candidatosEncontrados=[]
     auxiliar=[]
+    pathArquivo=''
     while pontoDeParada!="SIM" and pontoDeParada!="Sim" and pontoDeParada!="sim" and pontoDeParada!="SiM" and pontoDeParada!="SIm" and pontoDeParada!="sIM" and pontoDeParada!="siM":
         opcao=input("\nDigite a função desejada:\n   1 - Adicionar a lista\n   2 - Pesquisar na lista\n   3 - Adicionar lista através de dados Externos\n")
         if opcao=='1':
@@ -13,7 +16,8 @@ def main():
             candidatosEncontrados=pesquisarCandidato(lista)
             print(candidatosEncontrados)
         elif opcao=='3':
-            continue
+            nomePlanilha=input('Digite o nome da planilha: ')
+            leituraPlanilha(nomePlanilha, lista)
         elif opcao!='1' and opcao!='2' and opcao!='3':
             print("\nOpção Inválida\n")
         pontoDeParada=input("Deseja Sair? ")
@@ -46,11 +50,21 @@ def pesquisarCandidato(lista):
     while indice<len(lista):
         listaAuxiliar = [[item[1:] for item in element.split('_')] for element in lista]
         print(listaAuxiliar)
-        if listaAuxiliar[indice][1]==entrevista and listaAuxiliar[indice][1]==testePratico and listaAuxiliar[indice][2]==testeTeorico and listaAuxiliar[indice][3]==softSkill:
+        if listaAuxiliar[indice][1]>=entrevista and listaAuxiliar[indice][1]>=testePratico and listaAuxiliar[indice][2]>=testeTeorico and listaAuxiliar[indice][3]>=softSkill:
             candidatosEncontrados.append(indice)
         indice+=1
     if len(candidatosEncontrados)==0:
-        return 'Nenhum candidato encontrado com essas notas'
+        return 'Nenhum candidato encontrado com notas maiores que os parâmetros mínimos'
     return candidatosEncontrados
+
+def leituraPlanilha(nomePlanilha, lista):
+    # Carregar a planilha Excel
+    dados = pd.read_csv(f'./{nomePlanilha}.csv', header=None, usecols=[1])
+    dados = dados.drop(0)
+    arrayDados=dados.to_numpy().flatten()
+    adicionarListaDeCsv(arrayDados, lista)
+
+def adicionarListaDeCsv(arrayDados, lista):
+    lista.append(arrayDados)
 
 print(main())
