@@ -21,7 +21,7 @@ def main():
         elif opcao!='1' and opcao!='2' and opcao!='3':
             print("\nOpção Inválida\n")
         pontoDeParada=input("Deseja Sair? ")
-    return lista 
+    return 'Saindo...'
 
 def adicionarLista():
     entrevista=0
@@ -42,16 +42,15 @@ def adicionarLista():
 def pesquisarCandidato(lista):
     candidatosEncontrados=[]
     listaAuxiliar=[]
-    entrevista=input("\nDigite a nota da entrevista: \n")
-    testePratico=input("\nDigite a nota do Teste Prático: \n")
-    testeTeorico=input("\nDigite a nota do Teste Teórico: \n")
-    softSkill=input("\nDigite a nota de Soft Skill: \n")
+    entrevista=int(input("\nDigite a nota da entrevista: \n"))
+    testePratico=int(input("\nDigite a nota do Teste Prático: \n"))
+    testeTeorico=int(input("\nDigite a nota do Teste Teórico: \n"))
+    softSkill=int(input("\nDigite a nota de Soft Skill: \n"))
     indice=0
     while indice<len(lista):
         listaAuxiliar = [[item[1:] for item in element.split('_')] for element in lista]
-        print(listaAuxiliar)
-        if listaAuxiliar[indice][1]>=entrevista and listaAuxiliar[indice][1]>=testePratico and listaAuxiliar[indice][2]>=testeTeorico and listaAuxiliar[indice][3]>=softSkill:
-            candidatosEncontrados.append(indice)
+        if int(listaAuxiliar[indice][0])>=entrevista and int(listaAuxiliar[indice][1])>=testePratico and int(listaAuxiliar[indice][2])>=testeTeorico and int(listaAuxiliar[indice][3])>=softSkill:
+            candidatosEncontrados.append(f'Candidato {indice+1}')
         indice+=1
     if len(candidatosEncontrados)==0:
         return 'Nenhum candidato encontrado com notas maiores que os parâmetros mínimos'
@@ -65,6 +64,9 @@ def leituraPlanilha(nomePlanilha, lista):
     adicionarListaDeCsv(arrayDados, lista)
 
 def adicionarListaDeCsv(arrayDados, lista):
-    lista.append(arrayDados)
+    for elemento in arrayDados:
+        lista.append(elemento)
+    print(lista)
+    print("Dados salvos com sucesso!")
 
 print(main())
